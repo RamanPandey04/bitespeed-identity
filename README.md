@@ -31,6 +31,7 @@ Response:
 ## Local Setup
 
 npm install
+
 cp .env.example .env
 # add your DATABASE_URL in .env
 npm run dev
