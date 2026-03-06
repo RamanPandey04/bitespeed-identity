@@ -4,7 +4,7 @@ A web service that identifies and links customer contacts across multiple purcha
 
 ## Live Endpoint
 ```
-POST https://<your-render-url>/identify
+POST https://<https://bitespeed-identity-w88y.onrender.com/>/identify
 ```
 
 ## API
