@@ -60,8 +60,8 @@ async function demote(client: PoolClient, oldPrimaryId: number, newPrimaryId: nu
   );
 }
 
-function rootId(c: Contact) {
-  return c.linkPrecedence === "primary" ? c.id : c.linkedId!;
+function rootId(c: Contact): number {
+  return c.linkPrecedence === "primary" ? c.id : (c.linkedId as number);
 }
 
 function format(contacts: Contact[]): IdentifyResponse {
@@ -108,7 +108,7 @@ export async function identifyContact(req: IdentifyRequest): Promise<IdentifyRes
         `SELECT * FROM "Contact" WHERE id = ANY($1) AND "deletedAt" IS NULL`,
         [primaryIds]
       );
-      primaries.sort((a, b) => +new Date(a.createdAt) - +new Date(b.createdAt));
+      primaries.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
 
       const winner = primaries[0];
       for (const loser of primaries.slice(1)) {
